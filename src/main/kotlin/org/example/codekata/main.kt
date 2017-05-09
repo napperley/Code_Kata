@@ -1,7 +1,7 @@
 package org.example.codekata
 
-import org.example.codekata.kata04.printSmallestSpread
+import org.example.codekata.kata04.printSmallestGoals
 
 fun main(args: Array<String>) {
-    printSmallestSpread()
+    printSmallestGoals()
 }

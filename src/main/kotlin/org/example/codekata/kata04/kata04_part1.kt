@@ -2,6 +2,7 @@ package org.example.codekata.kata04
 
 import java.io.File
 
+@Suppress("unused")
 internal fun printSmallestSpread() {
     val fileUri = "".javaClass.getResource("/kata04_data/weather.dat").toURI()
     val data = fetchData(File(fileUri))
@@ -17,15 +18,15 @@ internal fun printSmallestSpread() {
 private fun createModels(data: Array<Array<String>>): Array<TemperatureModel> {
     val minPos = 1
     val maxPos = 0
-    val result = mutableListOf<TemperatureModel>()
+    val models = mutableListOf<TemperatureModel>()
 
     data.forEachIndexed { index, item ->
         // Temporarily store an array of temperatures.
         val tmp = item.map { str -> convertToTemperature(str) }
 
-        result += TemperatureModel(day = index + 1, min = tmp[minPos], max = tmp[maxPos])
+        models += TemperatureModel(day = index + 1, min = tmp[minPos], max = tmp[maxPos])
     }
-    return result.toTypedArray()
+    return models.toTypedArray()
 }
 
 private fun convertToTemperature(str: String) = str.replace(oldValue = "*", newValue = "").toDouble()
