@@ -16,9 +16,6 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 
-# Gradle:
-.idea/**/libraries
-
 # Mongo Explorer plugin:
 .idea/**/mongoSettings.xml
 
@@ -42,8 +39,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 ### Java template
-# Compiled class file
-*.class
 
 # Log file
 *.log
@@ -74,3 +69,4 @@ build/
 src/main/java/
 /.idea/
 src/test/java/
+src/main/resources/kata06_data/

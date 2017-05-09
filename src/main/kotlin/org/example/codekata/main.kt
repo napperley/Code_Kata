@@ -1,7 +1,7 @@
 package org.example.codekata
 
-import org.example.codekata.kata04.printSmallestGoals
+import org.example.codekata.kata06.printAnagrams
 
 fun main(args: Array<String>) {
-    printSmallestGoals()
+    printAnagrams()
 }
