@@ -62,6 +62,7 @@ hs_err_pid*
 
 # Additional files/directories to unignore.
 !/gradle/wrapper/*
+!/src/test/resources/
 
 # Additional files/directories to ignore.
 .gradle/

@@ -2,38 +2,52 @@ package org.example.codekata.kata06
 
 import java.io.File
 
+@Suppress("unused")
 internal fun printAnagrams() {
     val fileUri = "".javaClass.getResource("/kata06_data/word_list.txt").toURI()
     val data = fetchData(File(fileUri))
-    val anagrams = createAnagrams(data)
-    val limit = 50
+    val anagrams = allAnagrams(data)
+    val limit = 10
 
-    println("Anagrams:")
-    anagrams.filter { it.contains(char = ' ') }.take(limit).forEach { println(it) }
+    println("\nAnagrams:")
+    anagrams.take(limit).forEach { println(it) }
 }
 
-fun createAnagrams(data: Array<String>): Array<String> {
+private fun allAnagrams(data: Array<String>): Array<String> {
     val anagrams = mutableListOf<String>()
+    val possibleWords = data.toMutableList()
 
-    data.forEachIndexed { pos, w1 ->
-        anagrams += w1
-        data.filter { w2 -> w2.length == w1.length && w2 != w1 }.forEach { w2 ->
-            if (isAnagram(w1, w2)) anagrams[pos] += " $w2"
+    println("Creating anagrams...")
+    data.forEach { w ->
+        val tmpAnagram = createAnagram(w, possibleWords.toTypedArray())
+
+        if (tmpAnagram.isNotEmpty()) {
+            anagrams += tmpAnagram
+            possibleWords.removeAll(tmpAnagram.split(delimiters = ' '))
         }
     }
     return anagrams.toTypedArray()
 }
 
+private fun createAnagram(word: String, possibleWords: Array<String>): String {
+    var anagram = word
+
+    possibleWords.filter { pw -> pw.length == word.length }
+            .filterNot { pw -> pw.equals(other = word, ignoreCase = true) }
+            .forEach { pw -> if (isAnagram(word, pw)) anagram += " $pw" }
+    return if (' ' in anagram) anagram else ""
+}
+
 private fun fetchData(txtFile: File): Array<String> {
     val lines = mutableListOf<String>()
-    val limit = 1000
+    val limit = 20000
+    val minLength = 2
 
-    txtFile.forEachLine { l ->
-        lines += l.replace(oldValue = "'", newValue = "")
-    }
+    println("Reading data from text file...")
+    txtFile.forEachLine { if (it.length >= minLength) lines += it.replace(oldValue = "'", newValue = "") }
     // Place a limit otherwise the program will hang.
     return lines.take(limit).toTypedArray()
 }
 
-private fun isAnagram(word1: String, word2: String) =
+fun isAnagram(word1: String, word2: String) =
         word1.toLowerCase().toList().sorted() == word2.toLowerCase().toList().sorted()
