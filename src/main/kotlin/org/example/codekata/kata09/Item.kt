@@ -4,5 +4,6 @@ data class Item(
         var name: String,
         var pricingScheme: PricingScheme
 ) {
-    val price by lazy { pricingScheme.calculatePrice() }
+    val price
+        get() = pricingScheme.calculatePrice()
 }

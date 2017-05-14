@@ -29,13 +29,13 @@ private fun allAnagrams(data: Array<String>): Array<String> {
     return anagrams.toTypedArray()
 }
 
-private fun createAnagram(word: String, possibleWords: Array<String>): String {
-    var anagram = word
+fun createAnagram(word: String, possibleWords: Array<String>): String {
+    val builder = StringBuilder(word)
 
     possibleWords.filter { pw -> pw.length == word.length }
             .filterNot { pw -> pw.equals(other = word, ignoreCase = true) }
-            .forEach { pw -> if (isAnagram(word, pw)) anagram += " $pw" }
-    return if (' ' in anagram) anagram else ""
+            .forEach { pw -> if (isAnagram(word, pw)) builder.append(" $pw") }
+    return if (' ' in builder.toString()) builder.toString() else ""
 }
 
 private fun fetchData(txtFile: File): Array<String> {

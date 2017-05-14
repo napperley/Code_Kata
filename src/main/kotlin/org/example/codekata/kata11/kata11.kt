@@ -26,13 +26,11 @@ fun String.sortedCharacters(): String {
             .map { it.toLowerCase() }
             .groupBy { it }
 
-    ('a'..'z').forEach { letter ->
-        builder.append(letter.multiply(chars[letter]?.size ?: 0))
-    }
+    ('a'..'z').forEach { builder.append(it.duplicate(chars[it]?.size ?: 0)) }
     return builder.toString()
 }
 
-fun Char.multiply(num: Int): String {
+fun Char.duplicate(num: Int): String {
     val builder = StringBuilder()
 
     if (num > 0) (1..num).forEach { builder.append(this) }
