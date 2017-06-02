@@ -11,11 +11,11 @@ fun countCodeLines(srcFile: File): Int {
         lines += l.trim()
     }
     result = lines
-            .filterNot { it.startsWith(prefix = "//") }
-            .filterNot { it.startsWith(prefix = "/*") }
-            .filterNot { it.startsWith(prefix = "*/") }
-            .filterNot { it.startsWith(prefix = "*") }
-            .filterNot { it.isEmpty() }
-            .size
+        .filterNot { it.startsWith(prefix = "//") }
+        .filterNot { it.startsWith(prefix = "/*") }
+        .filterNot { it.startsWith(prefix = "*/") }
+        .filterNot { it.startsWith(prefix = "*") }
+        .filterNot { it.isEmpty() }
+        .size
     return result
 }

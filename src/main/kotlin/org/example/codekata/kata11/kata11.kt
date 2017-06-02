@@ -22,9 +22,9 @@ internal fun printSortedCharacters() {
 fun String.sortedCharacters(): String {
     val builder = StringBuilder()
     val chars = this.toCharArray()
-            .filter { it.isLetter() }
-            .map { it.toLowerCase() }
-            .groupBy { it }
+        .filter { it.isLetter() }
+        .map { it.toLowerCase() }
+        .groupBy { it }
 
     ('a'..'z').forEach { builder.append(it.duplicate(chars[it]?.size ?: 0)) }
     return builder.toString()
